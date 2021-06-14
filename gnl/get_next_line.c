@@ -7,7 +7,7 @@ char	*joinchar(char *line, char buff)
 	
 	while (line[i])
 		i++;
-	if (!(tmp = malloc(i + 1)))
+	if (!(tmp = malloc(i + 2)))
 		return NULL;
 	i = 0;
 	while (line[i]) {
@@ -27,7 +27,7 @@ int	get_next_line(char **line)
 	if (!(*line = malloc(1)))
 		return -1;
 	(*line)[0] = 0;
-	while (ret = read(0, &buff, 1)){
+	while ((ret = read(0, &buff, 1)) != 0) {
 		if (ret == -1) {
 			free(*line);
 			return (ret);
@@ -40,5 +40,6 @@ int	get_next_line(char **line)
 			else
 				*line = joinchar(*line, buff);
 		}
-	return ret
+	}
+	return ret;
 }
