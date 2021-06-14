@@ -1,7 +1,7 @@
 #include <unistd.h>
 #define MAX 255
-int
-	main(int argc, char **argv)
+
+int		main(int argc, char **argv)
 {
 	int	tab[MAX] = {0};
 	int	i, j = 0;

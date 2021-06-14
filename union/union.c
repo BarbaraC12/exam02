@@ -1,13 +1,14 @@
 #include <unistd.h>
 #define MAX 255
-int	main(int argc, char **argv)
+
+int		main(int argc, char **argv)
 {
 	int	tab[MAX] = {0};
 	int	i, j = 0;
 
 	if (argc == 3)
 	{
-		i = 1
+		i = 1;
 		while (i < 3)
 		{
 			j = 0;
