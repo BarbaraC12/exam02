@@ -1,43 +1,44 @@
 #include "get_next_line.h"
 
-static int	ft_strlen(char *str)
+char	*joinchar(char *line, char buff)
 {
-	int i = 0;
-	while (str[i] != '\0')
+	int		i = 0;
+	char 	*tmp;
+	
+	while (line[i])
 		i++;
-	return i;
-}
-
-static char	*join_char(char *str, char c)
-{
-	int i = 0;
-	char *out = malloc(ft_strlen(str) + 2);
-	if (!out)
+	if (!(tmp = malloc(i + 1)))
 		return NULL;
-	while (str[i])
-	{
-		out[i] = str[i];
+	i = 0;
+	while (line[i]) {
+		tmp[i] = line[i];
 		i++;
 	}
-	out[i] = c;
-	out[i + 1] = 0;
-	free(str);
-	return out;
-}
+	tmp[i] = buff;
+	tmp[i + 1] = 0;
+	return tmp;
+}	
 
 int	get_next_line(char **line)
 {
-	char buff[1];
-	int ret = 1;
+	int		ret;
+	char	buff;
 
-	*line = malloc(1);
-	**line = 0;
-	while (ret > 0)
-	{
-	      ret = read(0, buff, 1);
-	      if (buff[0] == '\n')
-		      break;
-	      *line = join_char(*line, buff[0]);
-	}
-	return ret;
+	if (!(*line = malloc(1)))
+		return -1;
+	(*line)[0] = 0;
+	while (ret = read(0, &buff, 1)){
+		if (ret == -1) {
+			free(*line);
+			return (ret);
+		}
+		else if (ret == 1) {
+			if (buff == '\n') {
+				*line = joinchar(*line, 0);
+				return (ret);
+			}
+			else
+				*line = joinchar(*line, buff);
+		}
+	return ret
 }
